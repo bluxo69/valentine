@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>She Said YES 💖</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+    }
+
+    /* Confetti canvas */
+    #confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(12px);
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #000;
+    }
+
+    img {
+      max-width: 280px;
+      border-radius: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Confetti -->
+  <canvas id="confetti"></canvas>
+
+  <!-- Celebration Content -->
+  <div class="content">
+    <h1>She said YES 😘❤️</h1>
+    <!-- Replace the GIF src below with your own if you want -->
+    <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" alt="Celebration GIF">
+  </div>
+
+  <!-- Confetti Script -->
+  <script>
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+
+    const confettiCount = 120;
+    const confetti = [];
+    const colors = ["#ff4d6d", "#ffd166", "#ff8fab", "#cdb4db", "#bde0fe"];
+
+    for (let i = 0; i < confettiCount; i++) {
+      confetti.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        size: Math.random() * 6 + 4,
+        speed: Math.random() * 2 + 1,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        angle: Math.random() * 360
+      });
+    }
+
+    function drawConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      confetti.forEach(c => {
+        ctx.fillStyle = c.color;
+        ctx.beginPath();
+        ctx.arc(c.x, c.y, c.size, 0, Math.PI * 2);
+        ctx.fill();
+
+        c.y += c.speed;
+        c.x += Math.sin(c.angle * Math.PI / 180);
+        c.angle += 1;
+
+        if (c.y > canvas.height) {
+          c.y = -10;
+          c.x = Math.random() * canvas.width;
+        }
+      });
+
+      requestAnimationFrame(drawConfetti);
+    }
+
+    drawConfetti();
+
+    window.addEventListener("resize", resizeCanvas);
+  </script>
+
+</body>
+</html>

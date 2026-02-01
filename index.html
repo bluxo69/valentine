@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Valentine 💖</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+    }
+
+    .card {
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.3);
+      padding: 45px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      color: black;
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    button {
+      padding: 15px 35px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    .yes {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    .no {
+      background: white;
+      color: #ff4d6d;
+    }
+
+    .message {
+      margin-top: 20px;
+      color: white;
+      font-size: 1rem;
+    }
+
+    /* Custom Pop-up Style */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background-color: black;
+      color: red;
+      border: 2px solid red;
+      border-radius: 15px;
+      font-size: 1.5rem;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      opacity: 1;
+      transition: opacity 1s ease-out;
+    }
+
+    .popup.active {
+      display: block;
+      opacity: 1;
+    }
+
+    .popup.fade-out {
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>
+      Will you be my Valentine,<br>
+      <span style="color: black;">My beautiful Princess</span> 😘❤️
+    </h1>
+
+    <div class="buttons">
+      <button class="yes" onclick="yesClicked()">YES</button>
+      <button class="no" onclick="noClicked()">NO</button>
+    </div>
+
+    <div class="message" id="message"></div>
+  </div>
+
+  <!-- Popup -->
+  <div id="popup" class="popup">
+    YES IS YOUR OPTION
+  </div>
+
+  <script>
+    function noClicked() {
+      // Show the popup
+      const popup = document.getElementById("popup");
+      popup.classList.add("active");
+
+      // After 5 seconds, fade out the popup
+      setTimeout(function() {
+        popup.classList.add("fade-out");
+
+        // After the fade-out transition, hide the popup completely
+        setTimeout(function() {
+          popup.classList.remove("active", "fade-out");
+        }, 1000); // Match the fade-out transition time (1s)
+      }, 5000); // 5 seconds before fade-out
+    }
+
+    function yesClicked() {
+      window.location.href = "celebration.html";
+    }
+  </script>
+
+</body>
+</html>
